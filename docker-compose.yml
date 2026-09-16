@@ -1,0 +1,30 @@
+services:
+  api:
+    build: ./apps/api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/api:/var/www
+    env_file:
+      - ./apps/api/.env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: lazybudget
+      POSTGRES_USER: lazybudget
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lazybudget"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  db-data:
