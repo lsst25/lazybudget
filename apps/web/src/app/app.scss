@@ -17,8 +17,10 @@
 }
 
 .header-trigger {
+  display: inline-flex;
+  align-items: center;
   height: 64px;
-  padding: 20px 24px;
+  padding: 0 24px;
   font-size: 20px;
   cursor: pointer;
   color: var(--kanagawa-old-white);
@@ -68,10 +70,17 @@ nz-header {
 
 .app-header {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 64px;
-  padding: 0;
+  padding: 0 24px 0 0;
   background: var(--kanagawa-sumi-ink-0);
   border-bottom: 1px solid var(--kanagawa-sumi-ink-3);
+}
+
+.header-logout {
+  color: var(--kanagawa-old-white);
 }
 
 nz-content {

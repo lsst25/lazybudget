@@ -1,37 +1,52 @@
-<nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-  >
-    <div class="sidebar-logo">
-      <a routerLink="/">
-        <img src="logo.svg" alt="lazybudget logo" />
-        <h1>lazybudget</h1>
-      </a>
-    </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzMatchRouter routerLink="/budget">
-        <nz-icon nzType="wallet" />
-        <span>Budget</span>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <nz-icon class="trigger" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
-        </span>
+@if (auth.isAuthenticated()) {
+  <nz-layout class="app-layout">
+    <nz-sider
+      class="menu-sidebar"
+      nzCollapsible
+      nzWidth="256px"
+      nzBreakpoint="md"
+      [(nzCollapsed)]="isCollapsed"
+      [nzTrigger]="null"
+    >
+      <div class="sidebar-logo">
+        <a routerLink="/">
+          <img src="logo.svg" alt="lazybudget logo" />
+          <h1>lazybudget</h1>
+        </a>
       </div>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
+      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-menu-item nzMatchRouter routerLink="/budget">
+          <nz-icon nzType="wallet" />
+          <span>Budget</span>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout>
+      <nz-header>
+        <div class="app-header">
+          <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <nz-icon class="trigger" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
+          </span>
+          <button
+            nz-button
+            nzType="text"
+            class="header-logout"
+            type="button"
+            [nzLoading]="logout.isPending()"
+            (click)="logout.mutate()"
+          >
+            <nz-icon nzType="logout" />
+            Log out
+          </button>
+        </div>
+      </nz-header>
+      <nz-content>
+        <div class="inner-content">
+          <router-outlet></router-outlet>
+        </div>
+      </nz-content>
+    </nz-layout>
   </nz-layout>
-</nz-layout>
+} @else {
+  <router-outlet></router-outlet>
+}

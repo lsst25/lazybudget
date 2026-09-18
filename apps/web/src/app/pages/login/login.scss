@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--kanagawa-sumi-ink-1);
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.login__card {
+  width: 100%;
+  max-width: 380px;
+  padding: 32px;
+  background: var(--kanagawa-sumi-ink-2);
+  border: 1px solid var(--kanagawa-sumi-ink-3);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+.login__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--kanagawa-fuji-white);
+  }
+}
+
+.login__logo {
+  width: 40px;
+  height: 40px;
+}
+
+.login__error {
+  margin-bottom: 16px;
+}
