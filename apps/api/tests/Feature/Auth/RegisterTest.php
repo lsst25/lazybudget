@@ -20,6 +20,8 @@ class RegisterTest extends TestCase
         $response->assertCreated()->assertJsonStructure(['token']);
 
         $this->assertDatabaseHas('users', ['email' => 'yurii@example.com']);
+        $this->assertIsString($response->json('token'));
+        $this->withToken($response->json('token'))->getJson('/api/user')->assertOk();
     }
 
     #[Test]
