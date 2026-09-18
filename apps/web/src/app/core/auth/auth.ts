@@ -30,6 +30,10 @@ export class Auth {
     );
   }
 
+  public forget(): void {
+    this.#setToken(null);
+  }
+
   #getToken(): string | null {
     return localStorage.getItem(AUTH_TOKEN_STORAGE_KEY) || null;
   }

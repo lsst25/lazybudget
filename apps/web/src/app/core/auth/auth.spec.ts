@@ -97,4 +97,16 @@ describe('Auth', () => {
     expect(auth.token()).toBeNull();
     expect(localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)).toBeNull();
   });
+
+  it('forget() drops the token locally without calling the API', () => {
+    localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, '3|old-token');
+    const { auth, http } = create();
+
+    auth.forget();
+
+    expect(auth.token()).toBeNull();
+    expect(auth.isAuthenticated()).toBe(false);
+    expect(localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)).toBeNull();
+    http.expectNone(() => true);
+  });
 });
