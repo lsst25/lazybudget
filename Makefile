@@ -1,7 +1,10 @@
 .DEFAULT_GOAL := help
 
 API  := docker compose exec api
-WEB  := cd apps/web &&
+# make runs recipes in /bin/sh, which does not load nvm; without this the web
+# targets would pick up whatever `node` is on PATH (e.g. Homebrew's newest).
+# `nvm use` reads the .nvmrc at the repo root.
+WEB  := cd apps/web && . "$$HOME/.nvm/nvm.sh" && nvm use --silent >/dev/null &&
 
 ## —— Containers ——————————————————————————————————————————————————————————————
 .PHONY: up build down restart logs ps
@@ -60,14 +63,17 @@ fresh: ## DESTRUCTIVE: drop all tables, re-migrate and seed
 	$(API) php artisan migrate:fresh --seed
 
 ## —— Web (Angular, runs on the host) ————————————————————————————————————————
-.PHONY: web web-install web-test web-build
+.PHONY: web web-install web-test web-test-watch web-build
 web: ## Start the Angular dev server on :4200 (proxies /api to :8000)
 	$(WEB) npm start
 
 web-install: ## Install web dependencies from the lockfile
 	$(WEB) npm ci
 
-web-test: ## Run web unit tests
+web-test: ## Run web unit tests once
+	$(WEB) npm test -- --watch=false
+
+web-test-watch: ## Run web unit tests in watch mode
 	$(WEB) npm test
 
 web-build: ## Production build of the web app
