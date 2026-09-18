@@ -5,7 +5,7 @@
   background: var(--kanagawa-sumi-ink-1);
 }
 
-.login {
+.register {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,7 +13,7 @@
   padding: 24px;
 }
 
-.login__card {
+.register__card {
   width: 100%;
   max-width: 380px;
   padding: 32px;
@@ -23,7 +23,7 @@
   box-shadow: 0 8px 24px var(--shadow-color);
 }
 
-.login__brand {
+.register__brand {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -39,16 +39,16 @@
   }
 }
 
-.login__logo {
+.register__logo {
   width: 40px;
   height: 40px;
 }
 
-.login__error {
+.register__error {
   margin-bottom: 16px;
 }
 
-.login__alt {
+.register__alt {
   margin: 16px 0 0;
   font-size: 13px;
   text-align: center;

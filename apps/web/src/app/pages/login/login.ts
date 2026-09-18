@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -16,7 +16,14 @@ interface Credentials {
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, NzAlertModule, NzButtonModule, NzFormModule, NzInputModule],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    NzAlertModule,
+    NzButtonModule,
+    NzFormModule,
+    NzInputModule,
+  ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })

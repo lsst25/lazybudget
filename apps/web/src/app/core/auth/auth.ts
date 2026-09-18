@@ -22,6 +22,19 @@ export class Auth {
     );
   }
 
+  public register(input: {
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+  }): Observable<{ token: string }> {
+    return this.httpClient.post<{ token: string }>('/api/v1/auth/register', input).pipe(
+      tap(({ token }) => {
+        this.#setToken(token);
+      }),
+    );
+  }
+
   public logout(): Observable<void> {
     return this.httpClient.post<void>('/api/v1/auth/logout', {}).pipe(
       finalize(() => {

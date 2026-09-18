@@ -69,6 +69,55 @@ describe('Auth', () => {
     expect(localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)).toBe('2|fresh-token');
   });
 
+  it('register posts the details and stores the returned token', () => {
+    const { auth, http } = create();
+    const next = vi.fn();
+    const input = {
+      name: 'Yurii',
+      email: 'yurii@example.com',
+      password: 'secret-password',
+      password_confirmation: 'secret-password',
+    };
+
+    auth.register(input).subscribe(next);
+
+    const req = http.expectOne({ method: 'POST', url: '/api/v1/auth/register' });
+    expect(req.request.body).toEqual(input);
+    req.flush({ token: '4|new-token' });
+
+    expect(next).toHaveBeenCalledExactlyOnceWith({ token: '4|new-token' });
+    expect(auth.token()).toBe('4|new-token');
+    expect(auth.isAuthenticated()).toBe(true);
+    expect(localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)).toBe('4|new-token');
+  });
+
+  it('register leaves the token null when validation fails', () => {
+    const { auth, http } = create();
+    const error = vi.fn();
+
+    auth
+      .register({
+        name: 'Yurii',
+        email: 'taken@example.com',
+        password: 'secret-password',
+        password_confirmation: 'secret-password',
+      })
+      .subscribe({ error });
+
+    http.expectOne({ method: 'POST', url: '/api/v1/auth/register' }).flush(
+      {
+        message: 'The email has already been taken.',
+        errors: { email: ['The email has already been taken.'] },
+      },
+      { status: 422, statusText: 'Unprocessable Content' },
+    );
+
+    expect(error).toHaveBeenCalledOnce();
+    expect(auth.token()).toBeNull();
+    expect(auth.isAuthenticated()).toBe(false);
+    expect(localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)).toBeNull();
+  });
+
   it('logout posts to the API while still holding the token, then forgets it', () => {
     localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, '3|old-token');
     const { auth, http } = create();
