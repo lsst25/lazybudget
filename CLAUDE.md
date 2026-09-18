@@ -54,15 +54,18 @@ lazybudget/
 
 ## Everyday commands (for the user to run)
 
+A root `Makefile` wraps the compose commands; `make` alone prints the list. Most used:
+
 ```bash
-docker compose up -d --build            # build image, start api + db
-docker compose exec api php artisan migrate
-docker compose exec api php artisan tinker
-docker compose exec api composer require vendor/package
-docker compose exec api php artisan test
-docker compose logs -f api
-docker compose down                     # keeps db-data volume; add -v to wipe it
+make up / make build / make down / make logs
+make test ARGS="--filter=RegisterTest"   # php artisan test inside the container
+make pint                                # fix code style (run before every commit)
+make artisan CMD="make:model Account -m" # any artisan command
+make migrate                             # make fresh is DESTRUCTIVE (drops all tables)
+make web                                 # Angular dev server on :4200, proxies /api → :8000
 ```
+
+When suggesting commands to the user, prefer the `make` form where one exists.
 
 App: http://localhost:8000. Postgres from the host: localhost:5432, user/db `lazybudget`, password `secret`
 (dev only).
