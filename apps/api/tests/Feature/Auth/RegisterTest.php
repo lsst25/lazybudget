@@ -21,7 +21,9 @@ class RegisterTest extends TestCase
 
         $this->assertDatabaseHas('users', ['email' => 'yurii@example.com']);
         $this->assertIsString($response->json('token'));
-        $this->withToken($response->json('token'))->getJson('/api/user')->assertOk();
+        $this->withToken($response->json('token'))
+            ->postJson('/api/v1/auth/logout')
+            ->assertNoContent();
     }
 
     #[Test]
