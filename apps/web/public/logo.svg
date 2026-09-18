@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="lazybudget">
+  <!-- Kanagawa-inspired mark: a coin resting on a wave -->
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#2A2A37"/>
+  <circle cx="32" cy="26" r="11" fill="#E6C384"/>
+  <circle cx="32" cy="26" r="7" fill="none" stroke="#2A2A37" stroke-width="2.5"/>
+  <path d="M6 44c6-6 10-6 16 0s10 6 16 0 10-6 16 0 6 4 8 4v12H6z" fill="#7E9CD8"/>
+  <path d="M6 50c6-6 10-6 16 0s10 6 16 0 10-6 16 0 6 4 8 4v6H6z" fill="#2D4F67"/>
+</svg>

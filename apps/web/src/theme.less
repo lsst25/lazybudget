@@ -1,0 +1,201 @@
+// NG-ZORRO theme: Kanagawa Wave
+// Palette: https://github.com/rebelot/kanagawa.nvim (Wave variant)
+// Variable reference: node_modules/ng-zorro-antd/src/style/themes/{default,dark}.less
+//
+// Order matters: the dark theme first (dark defaults for every component),
+// then our overrides. Less resolves each variable to its last definition.
+
+@import '../node_modules/ng-zorro-antd/ng-zorro-antd.dark.less';
+
+// ---------------------------------------------------------------------------
+// Kanagawa Wave palette
+// ---------------------------------------------------------------------------
+
+// Backgrounds (dark → light)
+@kanagawa-sumi-ink-0: #16161d;
+@kanagawa-sumi-ink-1: #1f1f28;
+@kanagawa-sumi-ink-2: #2a2a37;
+@kanagawa-sumi-ink-3: #363646;
+@kanagawa-sumi-ink-4: #54546d;
+
+// Selection / hover surfaces
+@kanagawa-wave-blue-1: #223249;
+@kanagawa-wave-blue-2: #2d4f67;
+
+// Diff / state backgrounds
+@kanagawa-winter-green: #2b3328;
+@kanagawa-winter-yellow: #49443c;
+@kanagawa-winter-red: #43242b;
+@kanagawa-winter-blue: #252535;
+
+// Foregrounds
+@kanagawa-fuji-white: #dcd7ba;
+@kanagawa-old-white: #c8c093;
+@kanagawa-fuji-gray: #727169;
+@kanagawa-katana-gray: #717c7c;
+
+// Accents
+@kanagawa-crystal-blue: #7e9cd8;
+@kanagawa-spring-blue: #7fb4ca;
+@kanagawa-light-blue: #a3d4d5;
+@kanagawa-wave-aqua-1: #6a9589;
+@kanagawa-wave-aqua-2: #7aa89f;
+@kanagawa-spring-green: #98bb6c;
+@kanagawa-autumn-green: #76946a;
+@kanagawa-carp-yellow: #e6c384;
+@kanagawa-boat-yellow-2: #c0a36e;
+@kanagawa-autumn-yellow: #dca561;
+@kanagawa-ronin-yellow: #ff9e3b;
+@kanagawa-surimi-orange: #ffa066;
+@kanagawa-autumn-red: #c34043;
+@kanagawa-samurai-red: #e82424;
+@kanagawa-peach-red: #ff5d62;
+@kanagawa-wave-red: #e46876;
+@kanagawa-sakura-pink: #d27e99;
+@kanagawa-oni-violet: #957fb8;
+@kanagawa-spring-violet-1: #938aa9;
+@kanagawa-dragon-blue: #658594;
+
+// ---------------------------------------------------------------------------
+// Ant Design variable overrides
+// ---------------------------------------------------------------------------
+
+// Brand and semantic colours. Ant derives the 1..10 ramps from these.
+@primary-color: @kanagawa-crystal-blue;
+@info-color: @kanagawa-wave-aqua-2;
+@success-color: @kanagawa-spring-green;
+@warning-color: @kanagawa-ronin-yellow;
+@error-color: @kanagawa-samurai-red;
+@highlight-color: @kanagawa-peach-red;
+@processing-color: @kanagawa-spring-blue;
+@link-color: @kanagawa-crystal-blue;
+@link-hover-color: @kanagawa-spring-blue;
+@link-active-color: @kanagawa-light-blue;
+
+// Named colour bases used by tags, badges, progress etc.
+@blue-base: @kanagawa-crystal-blue;
+@purple-base: @kanagawa-oni-violet;
+@cyan-base: @kanagawa-wave-aqua-2;
+@green-base: @kanagawa-spring-green;
+@magenta-base: @kanagawa-sakura-pink;
+@pink-base: @kanagawa-sakura-pink;
+@red-base: @kanagawa-autumn-red;
+@orange-base: @kanagawa-surimi-orange;
+@yellow-base: @kanagawa-carp-yellow;
+@volcano-base: @kanagawa-peach-red;
+@geekblue-base: @kanagawa-dragon-blue;
+@lime-base: @kanagawa-autumn-green;
+@gold-base: @kanagawa-autumn-yellow;
+
+// Surfaces
+@body-background: @kanagawa-sumi-ink-1;
+@component-background: @kanagawa-sumi-ink-2;
+@popover-background: @kanagawa-sumi-ink-3;
+@background-color-light: fade(@kanagawa-fuji-white, 4%);
+@background-color-base: fade(@kanagawa-fuji-white, 8%);
+@item-hover-bg: @kanagawa-wave-blue-1;
+@item-active-bg: @kanagawa-wave-blue-2;
+@shadow-color: fade(@kanagawa-sumi-ink-0, 60%);
+
+// Text
+@text-color: @kanagawa-fuji-white;
+@text-color-secondary: @kanagawa-old-white;
+@text-color-inverse: @kanagawa-sumi-ink-0;
+@heading-color: @kanagawa-fuji-white;
+@disabled-color: @kanagawa-fuji-gray;
+@text-selection-bg: @kanagawa-wave-blue-2;
+
+// Borders
+@border-color-base: @kanagawa-sumi-ink-4;
+@border-color-split: @kanagawa-sumi-ink-3;
+@divider-color: @kanagawa-sumi-ink-3;
+@border-radius-base: 4px;
+
+// Layout
+@layout-body-background: @kanagawa-sumi-ink-1;
+@layout-header-background: @kanagawa-sumi-ink-0;
+@layout-sider-background: @kanagawa-sumi-ink-0;
+@layout-trigger-background: @kanagawa-sumi-ink-2;
+
+// Menu (dark variant is what the sider uses)
+@menu-dark-bg: @kanagawa-sumi-ink-0;
+@menu-dark-submenu-bg: @kanagawa-sumi-ink-1;
+@menu-dark-color: @kanagawa-old-white;
+@menu-dark-highlight-color: @kanagawa-fuji-white;
+@menu-dark-item-active-bg: @kanagawa-wave-blue-2;
+
+// Tables (the budget grid will live here)
+@table-header-bg: @kanagawa-sumi-ink-3;
+@table-header-color: @kanagawa-old-white;
+@table-row-hover-bg: @kanagawa-wave-blue-1;
+@table-selected-row-bg: @kanagawa-wave-blue-2;
+@table-border-color: @kanagawa-sumi-ink-3;
+@table-footer-bg: @kanagawa-sumi-ink-3;
+
+// Inputs and pickers
+@input-bg: @kanagawa-sumi-ink-1;
+@input-placeholder-color: @kanagawa-fuji-gray;
+@input-border-color: @kanagawa-sumi-ink-4;
+@select-background: @kanagawa-sumi-ink-1;
+@picker-bg: @kanagawa-sumi-ink-1;
+@checkbox-check-bg: @kanagawa-sumi-ink-1;
+
+// Overlays
+@modal-header-bg: @kanagawa-sumi-ink-3;
+@modal-content-bg: @kanagawa-sumi-ink-3;
+@modal-footer-bg: @kanagawa-sumi-ink-3;
+@drawer-bg: @kanagawa-sumi-ink-3;
+@tooltip-bg: @kanagawa-sumi-ink-4;
+@tooltip-color: @kanagawa-fuji-white;
+
+// Feedback surfaces (alerts, tinted with Kanagawa's "winter" backgrounds)
+@alert-success-bg-color: @kanagawa-winter-green;
+@alert-success-border-color: @kanagawa-autumn-green;
+@alert-info-bg-color: @kanagawa-winter-blue;
+@alert-info-border-color: @kanagawa-wave-aqua-1;
+@alert-warning-bg-color: @kanagawa-winter-yellow;
+@alert-warning-border-color: @kanagawa-boat-yellow-2;
+@alert-error-bg-color: @kanagawa-winter-red;
+@alert-error-border-color: @kanagawa-autumn-red;
+
+// Misc
+@tag-default-bg: @kanagawa-sumi-ink-3;
+@tag-default-color: @kanagawa-old-white;
+@skeleton-color: @kanagawa-sumi-ink-3;
+@skeleton-to-color: @kanagawa-sumi-ink-4;
+@badge-text-color: @kanagawa-sumi-ink-0;
+@btn-default-bg: transparent;
+@btn-default-border: @kanagawa-sumi-ink-4;
+@scrollbar-thumb-bg: @kanagawa-sumi-ink-4;
+
+// Typography: monospaced digits everywhere (amounts line up in tables)
+@font-variant-base: tabular-nums;
+@font-feature-settings-base: 'tnum';
+
+// ---------------------------------------------------------------------------
+// Expose the palette to component stylesheets as CSS custom properties.
+// Components must never hard-code colours; use var(--kanagawa-*) instead.
+// ---------------------------------------------------------------------------
+:root {
+  --kanagawa-sumi-ink-0: @kanagawa-sumi-ink-0;
+  --kanagawa-sumi-ink-1: @kanagawa-sumi-ink-1;
+  --kanagawa-sumi-ink-2: @kanagawa-sumi-ink-2;
+  --kanagawa-sumi-ink-3: @kanagawa-sumi-ink-3;
+  --kanagawa-sumi-ink-4: @kanagawa-sumi-ink-4;
+  --kanagawa-wave-blue-1: @kanagawa-wave-blue-1;
+  --kanagawa-wave-blue-2: @kanagawa-wave-blue-2;
+  --kanagawa-fuji-white: @kanagawa-fuji-white;
+  --kanagawa-old-white: @kanagawa-old-white;
+  --kanagawa-fuji-gray: @kanagawa-fuji-gray;
+  --kanagawa-crystal-blue: @kanagawa-crystal-blue;
+  --kanagawa-spring-blue: @kanagawa-spring-blue;
+  --kanagawa-wave-aqua-2: @kanagawa-wave-aqua-2;
+  --kanagawa-spring-green: @kanagawa-spring-green;
+  --kanagawa-carp-yellow: @kanagawa-carp-yellow;
+  --kanagawa-ronin-yellow: @kanagawa-ronin-yellow;
+  --kanagawa-autumn-red: @kanagawa-autumn-red;
+  --kanagawa-samurai-red: @kanagawa-samurai-red;
+  --kanagawa-sakura-pink: @kanagawa-sakura-pink;
+  --kanagawa-oni-violet: @kanagawa-oni-violet;
+  --shadow-color: @shadow-color;
+}
