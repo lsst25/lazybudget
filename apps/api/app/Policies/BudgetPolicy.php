@@ -22,4 +22,12 @@ class BudgetPolicy
     {
         return $budget->owner()->whereKey($user->id)->exists();
     }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, Budget $budget): bool
+    {
+        return $budget->owner()->whereKey($user->id)->exists();
+    }
 }

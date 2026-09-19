@@ -10,6 +10,7 @@ use App\Models\Budget;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class BudgetController extends Controller
@@ -53,5 +54,12 @@ class BudgetController extends Controller
         $budget->update($request->validated());
 
         return new BudgetResource($budget);
+    }
+
+    public function destroy(Budget $budget): Response
+    {
+        $budget->delete();
+
+        return response()->noContent();
     }
 }

@@ -16,5 +16,6 @@ Route::prefix('v1')->group(function () {
         Route::get('budgets', [BudgetController::class, 'index']);
         Route::post('budgets', [BudgetController::class, 'store']);
         Route::patch('budgets/{budget}', [BudgetController::class, 'update'])->middleware('can:update,budget');
+        Route::delete('budgets/{budget}', [BudgetController::class, 'destroy'])->middleware('can:delete,budget');
     });
 });
