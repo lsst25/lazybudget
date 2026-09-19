@@ -1,7 +1,12 @@
 import {
+  CaretDownOutline,
+  FileOutline,
+  FolderOpenOutline,
   LogoutOutline,
   MenuFoldOutline,
   MenuUnfoldOutline,
+  PlusCircleOutline,
+  UnorderedListOutline,
   WalletOutline,
 } from '@ant-design/icons-angular/icons';
 
@@ -10,4 +15,14 @@ import {
  * without a network request (and in unit tests). Icons used inside pages
  * may rely on dynamic loading from /assets.
  */
-export const icons = [LogoutOutline, MenuFoldOutline, MenuUnfoldOutline, WalletOutline];
+export const icons = [
+  CaretDownOutline,
+  FileOutline,
+  FolderOpenOutline,
+  LogoutOutline,
+  MenuFoldOutline,
+  MenuUnfoldOutline,
+  PlusCircleOutline,
+  UnorderedListOutline,
+  WalletOutline,
+];

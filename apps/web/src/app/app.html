@@ -8,16 +8,17 @@
       [(nzCollapsed)]="isCollapsed"
       [nzTrigger]="null"
     >
-      <div class="sidebar-logo">
-        <a routerLink="/">
-          <img src="logo.svg" alt="lazybudget logo" />
-          <h1>lazybudget</h1>
-        </a>
-      </div>
+      <app-budget-switcher class="sidebar-logo" [collapsed]="isCollapsed" />
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-menu-item nzMatchRouter routerLink="/budget">
-          <nz-icon nzType="wallet" />
-          <span>Budget</span>
+        @if (budgets.current(); as current) {
+          <li nz-menu-item nzMatchRouter [routerLink]="['/budgets', current.id]">
+            <nz-icon nzType="wallet" />
+            <span>Budget</span>
+          </li>
+        }
+        <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="/budgets">
+          <nz-icon nzType="unordered-list" />
+          <span>All budgets</span>
         </li>
       </ul>
     </nz-sider>

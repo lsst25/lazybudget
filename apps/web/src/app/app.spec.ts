@@ -1,8 +1,10 @@
 import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { importProvidersFrom } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import { AUTH_TOKEN_STORAGE_KEY } from '@core/auth/auth';
 import { App } from './app';
 import { icons } from './icons-provider';
@@ -17,6 +19,7 @@ describe('App', () => {
         provideNzIcons(icons),
         provideHttpClient(),
         provideHttpClientTesting(),
+        importProvidersFrom(NzModalModule),
       ],
     }).compileComponents();
   });
@@ -29,10 +32,14 @@ describe('App', () => {
   it('renders the shell with the app name when logged in', async () => {
     localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, '1|stored-token');
     const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    // Logged in, so the shell asks for the budgets straight away.
+    TestBed.inject(HttpTestingController).expectOne('/api/v1/budgets').flush({ data: [] });
     await fixture.whenStable();
     const el: HTMLElement = fixture.nativeElement;
 
-    expect(el.querySelector('.sidebar-logo h1')?.textContent).toContain('lazybudget');
+    // The sider may auto-collapse in a narrow test window, hiding the name; the logo is always there.
+    expect(el.querySelector('.sidebar-logo .switcher__logo')).not.toBeNull();
     expect(el.querySelector('.header-logout')).not.toBeNull();
   });
 

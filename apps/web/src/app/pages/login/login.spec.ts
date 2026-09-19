@@ -35,8 +35,8 @@ describe('Login', () => {
   }
 
   function fillAndSubmit(email: string, password: string) {
-    component.form.setValue({ email, password });
-    component.submit();
+    component.model.set({ email, password });
+    return component.submit();
   }
 
   it('renders email and password fields and a submit button', async () => {
@@ -51,10 +51,12 @@ describe('Login', () => {
   it('does not call the API when the form is invalid', async () => {
     await setup();
 
-    fillAndSubmit('not-an-email', '');
+    const submitted = await fillAndSubmit('not-an-email', '');
 
+    expect(submitted).toBe(false);
     expect(login).not.toHaveBeenCalled();
-    expect(component.form.touched).toBe(true);
+    expect(component.form().touched()).toBe(true);
+    expect(component.form.email().invalid()).toBe(true);
   });
 
   it('logs in and navigates to the redirect target on success', async () => {
@@ -70,14 +72,14 @@ describe('Login', () => {
     expect(navigateByUrl).toHaveBeenCalledExactlyOnceWith('/budget/2026-09');
   });
 
-  it('falls back to /budget when no redirect is given', async () => {
+  it('falls back to the root URL when no redirect is given', async () => {
     await setup();
 
     fillAndSubmit('yurii@example.com', 'secret-password');
     response$.next({ token: '1|t' });
     response$.complete();
 
-    expect(navigateByUrl).toHaveBeenCalledExactlyOnceWith('/budget');
+    expect(navigateByUrl).toHaveBeenCalledExactlyOnceWith('/');
   });
 
   it("shows the API's validation message on 422", async () => {

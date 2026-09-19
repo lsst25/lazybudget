@@ -35,31 +35,7 @@
 
 .sidebar-logo {
   position: relative;
-  height: 64px;
-  padding-left: 24px;
-  overflow: hidden;
-  line-height: 64px;
-  background: var(--kanagawa-sumi-ink-0);
-  border-bottom: 1px solid var(--kanagawa-sumi-ink-3);
-  transition: all 0.3s;
-}
-
-.sidebar-logo img {
-  display: inline-block;
-  height: 32px;
-  width: 32px;
-  vertical-align: middle;
-}
-
-.sidebar-logo h1 {
-  display: inline-block;
-  margin: 0 0 0 16px;
-  color: var(--kanagawa-fuji-white);
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.02em;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  vertical-align: middle;
+  z-index: 1;
 }
 
 nz-header {
@@ -84,13 +60,11 @@ nz-header {
 }
 
 nz-content {
-  margin: 24px;
+  background: var(--kanagawa-sumi-ink-2);
+  overflow: auto;
 }
 
 .inner-content {
   padding: 24px;
-  background: var(--kanagawa-sumi-ink-2);
-  border: 1px solid var(--kanagawa-sumi-ink-3);
-  border-radius: 6px;
-  height: 100%;
+  min-height: 100%;
 }

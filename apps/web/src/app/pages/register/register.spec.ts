@@ -33,8 +33,8 @@ describe('Register', () => {
     password: string,
     password_confirmation = password,
   ) {
-    component.form.setValue({ name, email, password, password_confirmation });
-    component.submit();
+    component.model.set({ name, email, password, password_confirmation });
+    return component.submit();
   }
 
   it('renders the name, email, password and confirmation fields and a submit button', async () => {
@@ -51,23 +51,27 @@ describe('Register', () => {
   it('does not call the API when the form is invalid', async () => {
     await setup();
 
-    fillAndSubmit('', 'not-an-email', 'short');
+    const submitted = await fillAndSubmit('', 'not-an-email', 'short');
 
+    expect(submitted).toBe(false);
     expect(register).not.toHaveBeenCalled();
-    expect(component.form.touched).toBe(true);
+    expect(component.form().touched()).toBe(true);
+    expect(component.form.name().invalid()).toBe(true);
+    expect(component.form.email().invalid()).toBe(true);
+    expect(component.form.password().invalid()).toBe(true);
   });
 
   it('does not call the API when the passwords do not match', async () => {
     await setup();
 
-    fillAndSubmit('Yurii', 'yurii@example.com', 'secret-password', 'other-password');
+    await fillAndSubmit('Yurii', 'yurii@example.com', 'secret-password', 'other-password');
 
-    expect(component.form.invalid).toBe(true);
-    expect(component.form.controls.password_confirmation.hasError('mismatch')).toBe(true);
+    expect(component.form().invalid()).toBe(true);
+    expect(component.form.password_confirmation().getError('mismatch')).toBeDefined();
     expect(register).not.toHaveBeenCalled();
   });
 
-  it('registers and navigates to /budget on success', async () => {
+  it('registers and navigates to the root URL on success', async () => {
     await setup();
 
     fillAndSubmit('Yurii', 'yurii@example.com', 'secret-password');
@@ -82,7 +86,7 @@ describe('Register', () => {
     response$.next({ token: '1|t' });
     response$.complete();
 
-    expect(navigateByUrl).toHaveBeenCalledExactlyOnceWith('/budget');
+    expect(navigateByUrl).toHaveBeenCalledExactlyOnceWith('/');
   });
 
   it("shows the API's validation message on 422", async () => {

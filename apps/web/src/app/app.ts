@@ -5,16 +5,27 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { Auth } from '@core/auth/auth';
+import { Budgets } from '@core/budgets/budgets';
+import { BudgetSwitcher } from '@core/shell/budget-switcher/budget-switcher';
 import { mutation } from '@core/data/mutation';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterOutlet, NzButtonModule, NzIconModule, NzLayoutModule, NzMenuModule],
+  imports: [
+    RouterLink,
+    RouterOutlet,
+    NzButtonModule,
+    NzIconModule,
+    NzLayoutModule,
+    NzMenuModule,
+    BudgetSwitcher,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
   readonly auth = inject(Auth);
+  readonly budgets = inject(Budgets);
   readonly #router = inject(Router);
 
   isCollapsed = false;

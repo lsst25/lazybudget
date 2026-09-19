@@ -1,0 +1,28 @@
+@if (budget.isLoading()) {
+  <nz-spin class="budget__loading" nzSimple />
+} @else if (errorMessage(); as message) {
+  <nz-alert
+    nzType="error"
+    nzShowIcon
+    nzMessage="Could not open this budget"
+    [nzDescription]="message"
+    [nzAction]="allBudgets"
+  />
+  <ng-template #allBudgets>
+    <a nz-button nzSize="small" routerLink="/budgets">All budgets</a>
+  </ng-template>
+} @else if (budget.value(); as current) {
+  <header class="budget__header">
+    <h2 class="budget__title">{{ current.name }}</h2>
+    <p class="budget__meta">
+      Budgeting since {{ current.firstMonth | date: 'MMMM yyyy' }}
+      @if (current.role; as role) {
+        · <nz-tag [nzColor]="current.isOwner ? 'gold' : 'default'">{{ role }}</nz-tag>
+      }
+    </p>
+  </header>
+
+  <p class="budget__placeholder">
+    Accounts, categories and the monthly plan will appear here once the API grows those parts.
+  </p>
+}

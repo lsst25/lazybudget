@@ -1,0 +1,55 @@
+<button
+  type="button"
+  class="switcher"
+  [class.switcher--collapsed]="collapsed()"
+  nz-dropdown
+  nzTrigger="click"
+  nzPlacement="bottomLeft"
+  [nzDropdownMenu]="menu"
+  [nzOverlayStyle]="{ 'min-width': '232px' }"
+>
+  <img class="switcher__logo" src="logo.svg" alt="" />
+  @if (!collapsed()) {
+    <span class="switcher__name">
+      @if (budgets.current(); as current) {
+        {{ current.name }}
+      } @else {
+        lazybudget
+      }
+    </span>
+    <nz-icon class="switcher__caret" nzType="caret-down" />
+  }
+</button>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu class="switcher__menu">
+    <li nz-menu-item (click)="newBudget()">
+      <nz-icon nzType="plus-circle" />
+      <span class="switcher__label">New budget</span>
+    </li>
+
+    <li nz-submenu nzTitle="Open budget" nzIcon="folder-open" nzMenuClassName="switcher__submenu">
+      <ul>
+        @for (budget of budgets.items(); track budget.id) {
+          <li
+            nz-menu-item
+            [routerLink]="['/budgets', budget.id]"
+            [nzSelected]="budget.id === budgets.currentId()"
+          >
+            <nz-icon nzType="file" />
+            <span class="switcher__label">{{ budget.name }}</span>
+          </li>
+        } @empty {
+          <li nz-menu-item nzDisabled>No budgets yet</li>
+        }
+      </ul>
+    </li>
+
+    <li nz-menu-divider></li>
+
+    <li nz-menu-item routerLink="/budgets">
+      <nz-icon nzType="unordered-list" />
+      <span class="switcher__label">All budgets</span>
+    </li>
+  </ul>
+</nz-dropdown-menu>

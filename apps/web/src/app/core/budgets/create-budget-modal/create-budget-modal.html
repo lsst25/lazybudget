@@ -1,0 +1,25 @@
+<form nz-form nzLayout="vertical" (submit)="$event.preventDefault(); submit()" novalidate>
+  <app-form-field [field]="form.name" label="Name" for="budget-name">
+    <input
+      nz-input
+      id="budget-name"
+      [formField]="form.name"
+      placeholder="Household, Holiday fund, …"
+      autocomplete="off"
+      autofocus
+    />
+  </app-form-field>
+
+  @if (errorMessage(); as message) {
+    <nz-alert class="create-budget__error" nzType="error" [nzMessage]="message" />
+  }
+
+  <div class="create-budget__actions">
+    <button nz-button type="button" (click)="cancel()" [disabled]="create.isPending()">
+      Cancel
+    </button>
+    <button nz-button nzType="primary" type="submit" [nzLoading]="create.isPending()">
+      Create budget
+    </button>
+  </div>
+</form>

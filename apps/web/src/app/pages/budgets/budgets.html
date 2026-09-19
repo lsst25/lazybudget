@@ -1,0 +1,56 @@
+<header class="budgets__header">
+  <h2 class="budgets__title">Budgets</h2>
+  <button nz-button nzType="primary" type="button" (click)="newBudget()">
+    <nz-icon nzType="plus-circle" />
+    New budget
+  </button>
+</header>
+
+@if (errorMessage(); as message) {
+  <nz-alert
+    class="budgets__error"
+    nzType="error"
+    nzShowIcon
+    nzMessage="Could not load your budgets"
+    [nzDescription]="message"
+    [nzAction]="retryAction"
+  />
+  <ng-template #retryAction>
+    <button nz-button nzSize="small" type="button" (click)="retry()">Retry</button>
+  </ng-template>
+}
+
+<nz-table
+  #table
+  nzSize="middle"
+  nzTableLayout="fixed"
+  [nzData]="budgets.items()"
+  [nzLoading]="budgets.list.isLoading()"
+  [nzShowPagination]="false"
+  nzNoResult="No budgets yet. Create your first one."
+>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th nzWidth="140px">Your role</th>
+      <th nzWidth="180px">First month</th>
+      <th nzWidth="96px"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (budget of table.data; track budget.id) {
+      <tr [class.budgets__row--current]="budget.id === budgets.currentId()">
+        <td>
+          <a class="budgets__name" [routerLink]="['/budgets', budget.id]">{{ budget.name }}</a>
+        </td>
+        <td>
+          <nz-tag [nzColor]="budget.isOwner ? 'gold' : 'default'">{{ budget.role }}</nz-tag>
+        </td>
+        <td class="budgets__month">{{ budget.firstMonth | date: 'MMMM yyyy' }}</td>
+        <td class="budgets__actions">
+          <a nz-button nzType="link" nzSize="small" [routerLink]="['/budgets', budget.id]">Open</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</nz-table>

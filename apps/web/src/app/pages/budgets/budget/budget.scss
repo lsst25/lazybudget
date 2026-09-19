@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+.budget__loading {
+  display: block;
+  padding: 48px 0;
+}
+
+.budget__header {
+  margin-bottom: 24px;
+}
+
+.budget__title {
+  margin: 0 0 4px;
+  overflow-wrap: anywhere;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--kanagawa-fuji-white);
+}
+
+.budget__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--kanagawa-old-white);
+}
+
+.budget__placeholder {
+  margin: 0;
+  color: var(--kanagawa-fuji-gray);
+}

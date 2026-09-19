@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles. Colours live in theme.less; only layout fixes belong here. */
+
+/* Icons in dropdown menus sit flush against their label in ng-zorro 22; give them room.
+   Items wrap their content in .ant-menu-title-content, submenu titles do not. */
+.ant-dropdown-menu-item .ant-menu-title-content > nz-icon,
+.ant-dropdown-menu-submenu-title > nz-icon {
+  margin-right: 8px;
+}
+
+/* Budget switcher menu labels: cut long budget names with an ellipsis.
+   Global because the "Open budget" submenu renders in its own overlay. */
+.switcher__label {
+  display: inline-block;
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}

@@ -1,8 +1,15 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@core/auth/auth-guard';
+import { lastBudgetGuard } from '@core/budgets/last-budget-guard';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/budget' },
+  {
+    // Pure redirect: to the last opened budget, or to the list when there is none.
+    path: '',
+    pathMatch: 'full',
+    canActivate: [authGuard, lastBudgetGuard],
+    children: [],
+  },
   {
     path: 'login',
     loadComponent: () => import('@pages/login/login').then((m) => m.Login),
@@ -12,8 +19,8 @@ export const routes: Routes = [
     loadComponent: () => import('@pages/register/register').then((m) => m.Register),
   },
   {
-    path: 'budget',
+    path: 'budgets',
     canActivate: [authGuard],
-    loadChildren: () => import('@pages/budget/budget.routes').then((m) => m.BUDGET_ROUTES),
+    loadChildren: () => import('@pages/budgets/budgets.routes').then((m) => m.BUDGETS_ROUTES),
   },
 ];

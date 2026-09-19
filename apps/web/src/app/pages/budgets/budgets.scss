@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+.budgets__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.budgets__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--kanagawa-fuji-white);
+}
+
+.budgets__error {
+  margin-bottom: 16px;
+}
+
+.budgets__name {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  color: var(--kanagawa-fuji-white);
+
+  &:hover {
+    color: var(--kanagawa-crystal-blue);
+  }
+}
+
+.budgets__row--current .budgets__name {
+  color: var(--kanagawa-crystal-blue);
+}
+
+.budgets__month {
+  color: var(--kanagawa-old-white);
+  font-variant-numeric: tabular-nums;
+}
+
+.budgets__actions {
+  text-align: right;
+}

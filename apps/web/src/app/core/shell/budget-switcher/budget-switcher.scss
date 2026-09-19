@@ -1,0 +1,54 @@
+:host {
+  display: block;
+}
+
+.switcher {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 64px;
+  padding: 0 16px 0 24px;
+  border: 0;
+  background: var(--kanagawa-sumi-ink-0);
+  border-bottom: 1px solid var(--kanagawa-sumi-ink-3);
+  color: var(--kanagawa-fuji-white);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--kanagawa-sumi-ink-2);
+    outline: none;
+  }
+
+  &--collapsed {
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+.switcher__logo {
+  flex: none;
+  width: 32px;
+  height: 32px;
+}
+
+.switcher__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.switcher__caret {
+  flex: none;
+  font-size: 12px;
+  color: var(--kanagawa-crystal-blue);
+}
