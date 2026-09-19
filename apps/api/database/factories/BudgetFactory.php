@@ -25,6 +25,9 @@ class BudgetFactory extends Factory
         ];
     }
 
+    /**
+     * Attach the given user as the budget's owner once it is created.
+     */
     public function ownedBy(User $user): static
     {
         return $this->afterCreating(function (Budget $budget) use ($user) {
@@ -32,6 +35,9 @@ class BudgetFactory extends Factory
         });
     }
 
+    /**
+     * Attach the given user as a plain member once the budget is created.
+     */
     public function withMember(User $user): static
     {
         return $this->afterCreating(function (Budget $budget) use ($user) {

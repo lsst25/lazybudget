@@ -15,6 +15,9 @@ class BudgetPolicy
         return $budget->members()->whereKey($user->id)->exists();
     }
 
+    /**
+     * Determine whether the user can update the model.
+     */
     public function update(User $user, Budget $budget): bool
     {
         return $budget->owner()->whereKey($user->id)->exists();

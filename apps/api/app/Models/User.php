@@ -32,6 +32,9 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Budgets this user is a member of, with their role on the pivot.
+     */
     public function budgets(): BelongsToMany
     {
         return $this->belongsToMany(Budget::class, 'budget_members')

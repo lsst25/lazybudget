@@ -27,12 +27,18 @@ class Budget extends Model
         ];
     }
 
+    /**
+     * Every user who can access this budget, with their role on the pivot.
+     */
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'budget_members')
             ->withPivot('role', 'created_at');
     }
 
+    /**
+     * The members whose role is owner.
+     */
     public function owner(): BelongsToMany
     {
         return $this->members()->wherePivot('role', BudgetRole::Owner->value);
