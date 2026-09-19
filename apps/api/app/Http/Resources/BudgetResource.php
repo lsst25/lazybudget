@@ -23,6 +23,7 @@ class BudgetResource extends JsonResource
             'name' => $this->name,
             'first_month' => $this->first_month->toDateString(),
             'created_at' => $this->created_at?->toISOString(),
+            'role' => $this->whenPivotLoaded('budget_members', fn () => $this->pivot->role),
         ];
     }
 }

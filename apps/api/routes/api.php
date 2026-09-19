@@ -13,5 +13,6 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('budgets/{budget}', [BudgetController::class, 'show'])->middleware('can:view,budget');
+        Route::get('budgets', [BudgetController::class, 'index']);
     });
 });
