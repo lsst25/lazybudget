@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\BudgetRole;
 use App\Http\Requests\StoreBudgetRequest;
+use App\Http\Requests\UpdateBudgetRequest;
 use App\Http\Resources\BudgetResource;
 use App\Models\Budget;
 use Illuminate\Http\JsonResponse;
@@ -45,5 +46,12 @@ class BudgetController extends Controller
         return (new BudgetResource($withRole))
             ->response()
             ->setStatusCode(201);
+    }
+
+    public function update(UpdateBudgetRequest $request, Budget $budget): BudgetResource
+    {
+        $budget->update($request->validated());
+
+        return new BudgetResource($budget);
     }
 }

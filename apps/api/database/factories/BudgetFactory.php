@@ -31,4 +31,11 @@ class BudgetFactory extends Factory
             $budget->members()->attach($user->id, ['role' => BudgetRole::Owner->value]);
         });
     }
+
+    public function withMember(User $user): static
+    {
+        return $this->afterCreating(function (Budget $budget) use ($user) {
+            $budget->members()->attach($user->id, ['role' => BudgetRole::Member->value]);
+        });
+    }
 }

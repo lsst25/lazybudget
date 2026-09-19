@@ -15,5 +15,6 @@ Route::prefix('v1')->group(function () {
         Route::get('budgets/{budget}', [BudgetController::class, 'show'])->middleware('can:view,budget');
         Route::get('budgets', [BudgetController::class, 'index']);
         Route::post('budgets', [BudgetController::class, 'store']);
+        Route::patch('budgets/{budget}', [BudgetController::class, 'update'])->middleware('can:update,budget');
     });
 });
